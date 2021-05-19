@@ -1,11 +1,10 @@
 const repository = require('../repository/userRepository');
-//const service = require('../service/UserService');
 
 //Funções que serão exportadas para serem usadas em outros módulos.
 module.exports = {
     cadastrouser
 }
-//Cadastrando User
+//Cadastrando Usuario
 async function cadastrouser(req, res) {
     try {
         await repository.cadastrouser(req.body);

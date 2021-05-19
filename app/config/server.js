@@ -16,6 +16,8 @@ app.use(express.json({limit: '50mb'}));
 //Importando Rotas
 const userRoutes = require('../routes/userRoutes');
 app.use('/user', userRoutes);
+const prodRoutes = require('../routes/prodRoutes');
+app.use('/prod', prodRoutes);
 
 //Informando em que porta vai rodar
 app.listen(3000, () => {
