@@ -1,0 +1,17 @@
+{
+  "name": "cadastro",
+  "version": "1.0.0",
+  "description": "Projeto para cadastro de produtos",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app/app.js"
+  },
+  "author": "Jaqueline",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
+  }
+}
