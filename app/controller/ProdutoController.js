@@ -1,4 +1,4 @@
-const repository = require('../repository/ProdutoRepository');
+const produtoRepository = require('../repository/ProdutoRepository');
 const imagemRepository = require('../repository/ImagemRepository');
 const service = require('../service/ProdutoService');
 
@@ -11,7 +11,7 @@ module.exports = {
   
 async function listar(req, res) {
     try {
-      const produtos = await repository.listar();
+      const produtos = await produtoRepository.listar();
       produtos.forEach(p => p.imagens = JSON.parse(p.imagens));
       res.json({ message: 'OK', produtos });
     } catch (error) {
@@ -24,8 +24,7 @@ async function inserir(req, res) {
   
     try {
       req.body.id_user = req.user.id_user;
-      console.log(req.body);
-      id_prod = await repository.inserir(req.body);
+      id_prod = await produtoRepository.inserir(req.body);
       await service.inserirImagens(id_prod, req.files);
       res.json({ message: 'OK' });
     } catch (error) {
@@ -40,9 +39,13 @@ async function inserir(req, res) {
   
 async function deletar(req, res) {
     try {
-      console.log('chegou no deletar',req.params.id);
+      const imagens = await imagemRepository.listarPorIdProduto(req.params.id);
+ 
+      service.removerImagem(imagens);
+
       await imagemRepository.deletarPorIdProduto(req.params.id);
-      await repository.deletar(req.params.id);
+      await produtoRepository.deletar(req.params.id);
+
       res.json({ message: 'OK' });
     } catch (error) {
       res.status(500).json({ error: error.message });

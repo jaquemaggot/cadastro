@@ -28,6 +28,5 @@ async function listar(){
 }
 
 async function deletar(id_prod){
-    console.log('Chegou até o repository',id_prod);
     await mysql.executeQuery('DELETE FROM produtos WHERE id_prod = ?', [id_prod]);
 }
