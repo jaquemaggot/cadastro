@@ -30,22 +30,17 @@ async function inserir(req, res) {
     } catch (error) {
   
       if(id_prod) {
-        await service.rollback(id_prod);
+        try{
+          await service.deletar(id_prod)
+        }catch(ex){}
       }
-  
       res.status(500).json({ error: error.message });
     }
 }
   
 async function deletar(req, res) {
     try {
-      const imagens = await imagemRepository.listarPorIdProduto(req.params.id);
- 
-      service.removerImagem(imagens);
-
-      await imagemRepository.deletarPorIdProduto(req.params.id);
-      await produtoRepository.deletar(req.params.id);
-
+      await service.deletar(req.params.id)
       res.json({ message: 'OK' });
     } catch (error) {
       res.status(500).json({ error: error.message });

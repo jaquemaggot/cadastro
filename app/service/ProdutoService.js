@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   inserirImagens,
-  rollback,
+  deletar,
   removerImagem
 }
 
@@ -29,13 +29,11 @@ async function inserirImagens(idProduto, files) {
   }
 }
 
-async function rollback(idProduto) {
-  try {
-    await imagemRepository.deletarPorIdProduto(idProduto);
-    await repository.deletar(idProduto);
-  } catch(error) { 
-    console.log('error on rollback', error);
-  }
+async function deletar(idProduto) {
+  const imagens = await imagemRepository.listarPorIdProduto(idProduto);
+  removerImagem(imagens);
+  await imagemRepository.deletarPorIdProduto(idProduto);
+  await repository.deletar(idProduto);
 }
 
 function removerImagem(imagens) {
