@@ -4,11 +4,10 @@ const jwt = require('jsonwebtoken');
 module.exports = auth;
 
 async function auth(req, res, next) {
-
-  req.user = { id: 1, nome: 'eu' };
-  next();
+console.log('chegou no Middleware');
 
 if(isMetodoPublico(req.path, req.method)) {
+  console.log('chegou até metodos publicos');
   return next();
 }
 
@@ -32,9 +31,10 @@ try {
 
 const metodosPublicos = [
   { path: '/login', method: 'POST' },
-  { path: '/usuarios', method: 'POST' }
+  { path: '/user', method: 'POST' }
 ]
 
 function isMetodoPublico(path, method) {
+  console.log('chegou até metodos publicos');
   return metodosPublicos.some(m => m.method == method & m.path == path);
 }

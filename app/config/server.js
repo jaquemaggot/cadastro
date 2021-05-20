@@ -2,7 +2,8 @@
 const express = require('express');
 const app = express();
 const formData = require("express-form-data");
-const authMiddleware = require('./src/middleware/auth');
+const authMiddleware = require('../middleware/auth');
+const path = require('path');
 
 // setando as variaveis de ambiente
 require('dotenv').config({ path: path.join(__dirname, '../../.env') })

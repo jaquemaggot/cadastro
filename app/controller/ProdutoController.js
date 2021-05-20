@@ -1,4 +1,4 @@
-const repository = require('../repository/prodRepository');
+const repository = require('../repository/ProdutoRepository');
 const imagemRepository = require('../repository/ImagemRepository');
 const service = require('../service/ProdutoService');
 
