@@ -4,24 +4,23 @@ const jwt = require('jsonwebtoken');
 module.exports = auth;
 
 async function auth(req, res, next) {
-console.log('chegou no Middleware');
-
+//Se o meotodo for publico, o fluxo segue para frente
 if(isMetodoPublico(req.path, req.method)) {
-  console.log('chegou até metodos publicos');
   return next();
 }
-
+//Caso não tenha informado o token
 if(!req.headers.authorization)
   return res.status(401).json({ message: 'Authorization nao informado' });
 
+//Decodificando o token para validar se o usuario existe no sistema.
 try {
   const tokenDecoded = await jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
   const usuario = await repository.buscarPorEmail(tokenDecoded.usuario.email);
-
+  //Não encontrou nenhum usuario
   if(!usuario[0]) {
     return res.status(401).json({ message: 'Sem permissao', error: 'Usuario nao encontrado' });
   }
-
+  //libera o usuario e passa para frente.
   req.user = usuario[0];
   next();
   } catch(error) {
@@ -29,12 +28,13 @@ try {
   }
 }
 
+//Definindo os metodos que serão publicos na API
 const metodosPublicos = [
-  { path: '/login', method: 'POST' },
-  { path: '/user', method: 'POST' }
+  { path: '/login/', method: 'POST' },
+  { path: '/user/', method: 'POST' }
 ]
 
+//Função para validar se o metodo que chegou é o mesmo que definimos na const.
 function isMetodoPublico(path, method) {
-  console.log('chegou até metodos publicos');
   return metodosPublicos.some(m => m.method == method & m.path == path);
 }

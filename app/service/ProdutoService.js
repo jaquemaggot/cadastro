@@ -20,7 +20,7 @@ async function inserirImagens(idProduto, files) {
     const image = {
       nome: files[img].name,
       url: `http://localhost:3000/${files[img].path}`,
-      id_produto: idProduto
+      id_prod: idProduto
     }
 
     await imagemRepository.inserir(image);

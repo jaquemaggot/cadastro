@@ -10,6 +10,7 @@ async function login(req, res) {
   try {
     //Criptografando a senha para MD5, Utilizando a função Crypto
     req.body.senha = crypto.createHash('md5').update(req.body.senha).digest("hex");
+    
     const usuario = await repository.buscarPorEmailESenha(req.body);
 
     //Se não encontrar o usuario

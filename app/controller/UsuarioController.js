@@ -10,8 +10,8 @@ async function listar(req, res) {
   try {
     const usuarios = await repository.listar();
     res.json({ message: 'OK', usuarios });
-  } catch (errro) {
-    res.status(500).json({ error: error.message });
+  } catch (error) {
+    res.status(500).json({ error : error.message });
   }
 }
 

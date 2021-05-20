@@ -1,3 +1,5 @@
+// setando as variaveis de ambiente
+require('dotenv').config({});
 //Importando Express
 const express = require('express');
 const app = express();
@@ -5,8 +7,7 @@ const formData = require("express-form-data");
 const authMiddleware = require('../middleware/auth');
 const path = require('path');
 
-// setando as variaveis de ambiente
-require('dotenv').config({ path: path.join(__dirname, '../../.env') })
+
 
 //fazendo a coxenão com o BD
 require('./dbconnection');
@@ -26,10 +27,12 @@ app.use(formData.parse(options));
 app.use(authMiddleware);
 
 //Importando Rotas
-const userRoutes = require('../routes/UsuarioRoutes');
-app.use('/user', userRoutes);
+const UsuarioRoutes = require('../routes/UsuarioRoutes');
+app.use('/user', UsuarioRoutes);
+
 const prodRoutes = require('../routes/ProdutosRoutes');
 app.use('/prod', prodRoutes);
+
 const LoginRoutes = require('../routes/LoginRoutes');
 app.use('/login',LoginRoutes)
 

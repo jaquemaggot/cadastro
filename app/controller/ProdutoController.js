@@ -20,17 +20,18 @@ async function listar(req, res) {
 }
   
 async function inserir(req, res) {
-    let idProduto = null;
+    let id_prod = null;
   
     try {
-      req.body.id_usuario = req.user.id;
-      idProduto = await repository.inserir(req.body);
-      await service.inserirImagens(idProduto, req.files);
+      req.body.id_user = req.user.id_user;
+      console.log(req.body);
+      id_prod = await repository.inserir(req.body);
+      await service.inserirImagens(id_prod, req.files);
       res.json({ message: 'OK' });
     } catch (error) {
   
-      if(idProduto) {
-        await service.rollback(idProduto);
+      if(id_prod) {
+        await service.rollback(id_prod);
       }
   
       res.status(500).json({ error: error.message });
@@ -39,6 +40,7 @@ async function inserir(req, res) {
   
 async function deletar(req, res) {
     try {
+      console.log('chegou no deletar',req.params.id);
       await imagemRepository.deletarPorIdProduto(req.params.id);
       await repository.deletar(req.params.id);
       res.json({ message: 'OK' });

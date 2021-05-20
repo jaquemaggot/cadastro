@@ -9,7 +9,7 @@ module.exports = {
 }
 
 async function listar() {
-    return await mysql.executeQuery('SELECT id, nome, email FROM usuarios');
+    return await mysql.executeQuery('SELECT id_user, nome, email FROM usuarios');
 }
   
 async function inserir(usuario){
@@ -17,10 +17,10 @@ async function inserir(usuario){
 }
 
 async function buscarPorEmailESenha(usuario) {
-    return await mysql.executeQuery('SELECT id, nome, email FROM usuarios WHERE email LIKE ? AND senha = ?', [usuario.email, usuario.senha]);
+    return await mysql.executeQuery('SELECT id_user, nome, email FROM usuarios WHERE email LIKE ? AND senha = ?', [usuario.email, usuario.senha]);
 }
 
 async function buscarPorEmail(email) {
-    return await mysql.executeQuery('SELECT id, nome, email FROM usuarios WHERE email LIKE ?', [email]);
+    return await mysql.executeQuery('SELECT id_user, nome, email FROM usuarios WHERE email LIKE ?', [email]);
 }
 

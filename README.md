@@ -1,28 +1,26 @@
 # Projeto
-> pokemon
+> Cadastro
 
 ## Indíce
 * [Informação](#informação)
 * [Requisitos](#requisitos)
+* [Inicio](#inicio)
 * [Ambiente](#ambiente)
 * [Arquitetura de pastas](#arquitetura-de-pastas)
 * [Instalação](#instalação)
 * [Rotas](#rotas)
 
 ## Informação
-Projeto para cadastro de pokemons via excel
-
-## Clone
-Para iniciar as configurações clone o projeto
-https://github.com/jaquemaggot/pokemon.git
+Projeto para cadastro de produtos com imagens
 
 ## Requisitos
 * [Node 14.16.1](https://nodejs.org/en/)
-* [Mysql 5.7](https://www.mysql.com/)
+* [mysql 5.7.25](https://www.mysql.com/)
 
-##Primeira ação
-**Criar a tabela no banco de dados:**
+## Inicio
+Para iniciar as configurações clone o projeto
 
+### Criar tabela no Banco de Dados
 ```sh
 executar o script init.sql no banco de dados Mysql
 ```
@@ -39,21 +37,21 @@ Configure as variáveis de ambiente:
 | MYSQL_HOST                     | Host do Mysql                                                 |              | &check;     |
 | MYSQL_DATABASE                 | Database do Mysql                                             |              | &check;     |
 | MYSQL_CONNECTION_LIMIT         | Quantidade de conexoes simultaneas do Mysql                   |      1       |             |
+| JWT_SECRET                     | Chave JWT                                                     |              | &check;     |
 
 ## Arquitetura de pastas
 ### Diretórios
 ```bash
-pokemon
+cadastro
   |-- app
     |-- config
       dbconnection.js
       server.js
     |-- controller
+    |-- middleware
     |-- repository
-    |-- service
-    |-- public
-      |--images
     |-- routes
+    |-- service
     |-- utils
       mysql.js
     app.js
@@ -82,28 +80,20 @@ npm start
 
 ## Rotas
 
-```bash
-Para testar as rotas utilize Insomnia ou Postman
-GET - /pokemon -> lista todos os pokemons de forma paginada com filtros (query na url)
 
-parametros (query parameters):
- - page -> pagina solicitada (default 1)
- - limit -> quantidade de registros por pagina (default 10)
- - name -> nome do pokemon
- - number -> numero do pokemon
- - type1 -> tipo 1 do pokemon
- - type2 -> tipo 1 do pokemon
- - spa -> SPA do pokemon
- - spd -> SPD do pokemon
- - spe -> SPE do pokemon
- - total_status -> status total do pokemon
+**Para testar as rotas utilize Insomnia ou Postman
+```bash
+POST - /user/ -> Realiza o cadastro de um novo usuario
+GET  -/user/ -> Listagem de usuarios cadastrados
+```
+```bash
+POST - /login/ -> Realiza o login do usuario
+```
+```bash
+POST - /prod/ -> Realiza o cadastro de um novo produto
+GET - /prod/  -> Lista todos os produtos com suas respectivas imagens
+DELETE - /prod/:id -> Realiza a exclusão de um produto e suas respectivas imagens
 ```
 
-```bash
-GET - /pokemon/number -> busca um pokemon pelo numero
-```
-
-```bash
-POST - /pokemon/excel -> cadastrar ou atualizar os pokemons atraves de uma planilha
-*Coloque a Planilha excel na pasta, Planilha (\app\public\planilha)
-```
+**Collection Postman com todas as rotas
+https://www.getpostman.com/collections/b540f6a242d761bb6f34
