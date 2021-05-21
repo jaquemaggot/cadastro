@@ -30,8 +30,8 @@ try {
 
 //Definindo os metodos que serão publicos na API
 const metodosPublicos = [
-  { path: '/login/', method: 'POST' },
-  { path: '/user/', method: 'POST' }
+  { path: '/login', method: 'POST' },
+  { path: '/user', method: 'POST' }
 ]
 
 //Função para validar se o metodo que chegou é o mesmo que definimos na const.

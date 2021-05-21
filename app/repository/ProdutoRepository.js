@@ -21,12 +21,12 @@ async function listar(){
         p.descricao,
         p.preco,
         (select JSON_ARRAYAGG(
-		    JSON_OBJECT('id', id_img, 'nome', nome, 'url', url)) FROM imagens i where i.id_prod = p.id_prod
-        ) as imagens
-    FROM cadastro.produtos p
+		    JSON_OBJECT('id', id_img, 'nome', nome, 'url', url)) FROM IMAGENS i where i.id_prod = p.id_prod
+        ) as IMAGENS
+    FROM PRODUTOS p
   `);
 }
 
 async function deletar(id_prod){
-    await mysql.executeQuery('DELETE FROM produtos WHERE id_prod = ?', [id_prod]);
+    await mysql.executeQuery('DELETE FROM PRODUTOS WHERE id_prod = ?', [id_prod]);
 }
