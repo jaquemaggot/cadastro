@@ -79,7 +79,7 @@ npm start
 ```
 
 ## Rotas
-[Postman Collection]()
+[Postman Collection](https://www.getpostman.com/collections/b540f6a242d761bb6f34)
 
 
 **Para acessar as rotas é necessario estar autenticado**
