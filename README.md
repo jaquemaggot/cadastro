@@ -81,6 +81,7 @@ npm start
 ## Rotas
 [Postman Collection](https://www.getpostman.com/collections/b540f6a242d761bb6f34)
 
+
 **Para acessar as rotas é necessario estar autenticado**
 * Informar o **Authorization** no **headers** de toda requisição, exceto as rotas de cadastro de usuario e login
 ```bash
