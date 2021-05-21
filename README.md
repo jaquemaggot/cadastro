@@ -79,21 +79,43 @@ npm start
 ```
 
 ## Rotas
+[Postman Collection](https://www.getpostman.com/collections/b540f6a242d761bb6f34)
 
-
-**Para testar as rotas utilize Insomnia ou Postman
+**Para acessar as rotas é necessario estar autenticado**
+* Informar o **Authorization** no **headers** de toda requisição, exceto as rotas de cadastro de usuario e login
 ```bash
-POST - /user/ -> Realiza o cadastro de um novo usuario
-GET  -/user/ -> Listagem de usuarios cadastrados
-```
-```bash
-POST - /login/ -> Realiza o login do usuario
-```
-```bash
-POST - /prod/ -> Realiza o cadastro de um novo produto
-GET - /prod/  -> Lista todos os produtos com suas respectivas imagens
-DELETE - /prod/:id -> Realiza a exclusão de um produto e suas respectivas imagens
+Authorization: "token"
 ```
 
-**Collection Postman com todas as rotas
-https://www.getpostman.com/collections/b540f6a242d761bb6f34
+### Usuarios
+* GET - /user -> Lista de usuarios
+* POST - /user -> Cadastro de usuario
+```json
+{
+  "nome": "nome-usuario", // Limite de 200 caracteres
+  "email": "email-usuario@email.com", // Limite de 200 caracteres
+  "senha": "senha-usuario" // Limite de 250 caracteres
+}
+```
+
+### Login
+* POST - /login -> Login do usuario
+```json
+{
+  "email": "email-usuario@email.com",
+  "senha": "senha-usuario"
+}
+```
+
+### Produto
+* GET - /prod -> Lista os produtos com suas respectivas imagens
+* DELETE - /prod/:id -> Exclusão de um produto pelo id e suas respectivas imagens
+* POST - /prod -> Cadastro do produto e suas imagens (no maximo 3) - **Body no formato form-data**
+```bash
+  "nome": "produto", // Limite de 250 caracters
+  "descricao": "descricao do produto", // Limite de 500 caracters
+  "preco": 10.50, // Numerico com 2 casas decimais
+  "image1": "arquivo1" // File
+  "image2": "arquivo2" // File
+  "image3": "arquivo3" // File
+```

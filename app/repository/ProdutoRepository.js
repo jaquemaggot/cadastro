@@ -22,7 +22,7 @@ async function listar(){
         p.preco,
         (select JSON_ARRAYAGG(
 		    JSON_OBJECT('id', id_img, 'nome', nome, 'url', url)) FROM IMAGENS i where i.id_prod = p.id_prod
-        ) as IMAGENS
+        ) as imagens
     FROM PRODUTOS p
   `);
 }
